@@ -1,0 +1,9 @@
+_site
+.sass-cache
+.jekyll-metadata
+.vscode
+*.xml
+changelog.txt
+*.log
+
+node_modules/

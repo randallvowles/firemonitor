@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include head.html %}
+    <style>
+        body {
+            padding-top: 0;
+        }
+        .alert-top-of-page {
+            margin: 0 !important;
+        }
+        header {
+            position: relative;
+        }
+        .content {
+            overflow: visible
+        }
+    </style>
+</head>
+
+<body class="noAutoDrawer">
+    {% if site.alert.active == true %}
+        {% include alert-box.html %}
+    {% endif %}
+    {% include nav-drawer.html %}
+    {% include app-toolbar.html %}
+
+    <div class="content">
+        {% include loading-message.html %}
+
+        <div id="app-container">
+
+            <!-- Station information -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <span id="station-info" class="slim-vertical"></span>
+                </div>
+            </div>
+            
+            <!-- Alert box -->
+            <div id="alert-box-container"></div>
+
+            <!-- Weather Summary -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="lead">24 Hour Summary</p>
+                    <hr/>
+                    <div id="weather-summary-container"></div>
+                </div>
+            </div>
+
+            <!-- Table tools -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="lead">Tabular Observations&nbsp;<span id="tabtable-timespan" class="small"></span></p>
+                    <hr/>
+                    <button id="show-sensor-menu" class="btn btn-default pull-left">
+                        <i class="fa fa-thermometer-three-quarters" aria-hidden="true"></i>
+                        &nbsp;Available Variables&nbsp;<span id="hidden-sensor-count" class="badge hidden">0</span>
+                    </button>
+                    &nbsp;
+                    <!--<button id="qc-by-year-button" class="btn btn-default pull-left">
+                        &nbsp;QC for Calendar Year
+                    </button>-->
+                </div>
+            </div>
+
+            <div class="vspace-0"></div>
+
+            <!-- Tab table -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="tabtable-container" class="tabtable-container app-hide-on-load"></div>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="well">
+                        <ul>
+                            <li>If an item is highlighted <span style="color:red">red</span>, then there is a quality control flag associated with the observation.</li>
+                            <li>You can investigate the QC flag by mousing over the observation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+
+    </div> <!-- /container -->
+
+    {% include settings_editor.html %}
+    {% include footer.html %}
+</body>
+
+    {% minibundle js %}
+    source_dir: _src
+    destination_path: /assets/js/tabtable
+    baseurl: {{ site.baseurl }}
+    assets:
+      - /core/mesonet-2.2.0
+      - /core/core.user
+      - /core/d3.v4
+      - /core/core.units
+      - /apps/tabtable
+    attributes:
+      id: __js-tabtable
+    {% endminibundle %}
+
+    <script src="https://scs.synopticlabs.net/js/glytics_slabs.js"></script>
+</html>

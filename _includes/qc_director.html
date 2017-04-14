@@ -1,0 +1,49 @@
+<!-- Director modal -->
+<div class="modal fade" id="qc-director" tabindex="-1" role="dialog" aria-labelledby="qc-director">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="qc-director-title">What would you like to do?</h4>
+            </div>
+            <div class="modal-body">
+                <div id="qc-director-btns" class="row">
+                    <div class="col-xs-12">
+                        <button id="qcd-24hr-view-btn" class="btn btn-default" aria-expanded="false">
+                    <i class="fa fa-table" aria-hidden="true"></i>&nbsp;24hr view</button>
+                    </div>
+                    <div class="vspace-2"></div>
+                </div>
+                <div id="qc-director-progress" class="progress">
+                    <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tab Table modal -->
+<div class="modal fade" id="tabtable-modal" tabindex="-1" role="dialog" aria-labelledby="tabtable">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="tabtable-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="qc-codes-container"></div>
+                <hr/>
+                <div id="tabtable-table-container" class="modal-table"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

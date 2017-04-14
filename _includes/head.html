@@ -1,0 +1,41 @@
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SynopticLabs/MesoWest">
+    <meta name="author" content="SynopticLabs/MesoWest">
+
+    <title>{% if page.title %}
+               {{page.title}}
+           {% else %}
+               MesoWest/SynopticLabs
+           {% endif %}</title>
+    
+    <!-- Until I figure out a better build process, this needs to be done this way -->
+    <link href="{{"/assets/css/main.css" | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{"/assets/css/ie10-viewport-bug-workaround.css" | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{"/assets/fonts/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl }}" rel="stylesheet">
+
+    {% minibundle js %}
+    source_dir: _src
+    destination_path: /assets/js/baseplate
+    baseurl: {{ site.baseurl }}
+    assets:
+      - /core/baseplate
+      - /core/bs.transition
+      - /core/bs.alert
+      - /core/bs.button
+      - /core/bs.collapse
+      - /core/bs.dropdown
+      - /core/bs.modal
+      - /core/bs.tooltip
+      - /core/bs.tab
+      - /core/bs.popover
+    attributes:
+      id: __js-baseplate
+    {% endminibundle %}
+
+    <script src='//scs.synopticlabs.net/js/globals/nav-1.1.12.js'></script>
+    <script>setTimeout(function() {slnav.renderContent("0")},1);</script>
+    
+    <!-- Can't rememeber why I put this here -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">

@@ -1,0 +1,29 @@
+img.img__mw20-logo {
+    max-height: 20px;
+    text-align: right;
+}
+
+.img__mw20-logo p {
+    text-align: right;
+}
+
+// button.img__mw20-logo {
+//     background:	#990000;
+// }
+
+button.img__mw20-logo {
+    $color: $input-border-focus;
+    $color-rgba: rgba(red($color), green($color), blue($color), .6);
+
+    background:	#C62828;
+    display: block;
+    text-align: right;
+    padding-bottom: 5px;
+    
+    &:focus, &:hover {
+    background:	#C62828;
+    border-color: $color;
+    outline: 0;
+    @include box-shadow(0 0 8px $color-rgba);
+  }
+}

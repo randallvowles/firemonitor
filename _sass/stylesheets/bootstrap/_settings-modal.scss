@@ -1,0 +1,25 @@
+/*
+* Settings dialog
+*/
+.nested-selector {
+    list-style: none;
+    // padding-left: 1em;
+}
+
+label, label.sensor-selector {
+    padding-left: 0.5em;
+}
+
+.settings-sensor-list {
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+.settings-sensor-list li {
+    list-style: none;
+}
+
+.unit-table td,
+.unit-table th {
+    text-align: left !important;
+}

@@ -1,0 +1,48 @@
+<div id="the-red-logo-bar">
+    <div id="drawer" class="js-drawer hide-drawer transitional">
+        <!-- Noscript and SEO -->
+        <noscript>
+            <ul>
+                </li><a href="/">Mesowest &amp; SynopticLabs</a></b><br><a href="/about-us/">About Us</a></li>
+                </li><a href="http://meso1.chpc.utah.edu/mesowest_overview/">MesoWest Research</a></li>
+                </li><a href="/contact/">Contact Us</a></li>
+                </li><a href="/operational/">Services from MesoWest</a></li>
+                </li><a href="http://mesowest.utah.edu/">University Web Page</a></li>
+                </li><a href="http://glffc.utah.edu/">Great Lakes Fire &amp; Fuels</a></li>
+                </li><a href="http://fire.synopticlabs.org/alaska/">Alaska Fire &amp; Fuels</a></li>
+                </li><a href="http://mesowest.org/api/">SynopticLabs APIs</a></li>
+                </li><a href="/api/products/">Our APIs</a></li>
+                </li><a href="/api/guides/?getstarted">Get Started</a></li>
+                </li><a href="/api/gallery/">Gallery</a></li>
+                </li><a href="/api/guides/">Guides</a></li>
+                </li><a href="/api/tutorials/">Tutorials</a></li>
+                </li><a href="/api/explore/">Explorer</a></li>
+                </li><a href="/api/faq/">FAQ</a></li>
+                </li><a href="/api/account/">Your Account</a></li>
+                </li><a href="/api/signup/">Get your API key</a></li>
+            </ul>
+        </noscript>
+    </div>
+    <header>
+        <a href='.' class='icon-menu js-icon-menu'><i class='fa fa-bars fa-lg'></i></a> 
+        {% if page.use_api_branding == "true" %}
+            <a href='/api/' class='applogo'><img src='https://scs.synopticlabs.net/images/services/mw-sl-api-light-logo.png' class='service_logo'></a>
+            <!-- get started CTA -->
+            <div class='actionitems'>
+                <a style='display:block;height:30px;line-height:10px;margin:15px;padding:10px;border-radius:27px;background-color:#900;font-size:13px;font-weight:600;' href='/api/guides/get-started/'>
+                    <i class='fa fa-chevron-circle-left' style='line-height:inherit;'></i> get started!
+                </a>
+            </div>
+        {% else %}
+            <img src='https://scs.synopticlabs.net/images/mw-sl-light-logo.png' class='service_logo'>
+        {% endif %}
+        <noscript><div style='clear:both;margin:auto;padding:10px;line-height:30px;background-color:#FC0;color:#000;text-align:center;z-index:100000'>
+            <strong>SynopticLabs' web applicaions use JavaScript to display information to you</strong> 
+            You are seeing this message because your browser isn't running our JavaScript.
+            Please enable JavaScript on this browser before using synopticlabs.org.
+        </div></noscript>
+        <div class='actionitems'>
+            <!-- ACTION ITEMS MUST BE HANDLED DIFFERENTLY IN THIS PARADIGM -->
+        </div>
+    </header>
+</div>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include head.html %}
+</head>
+
+<body class="noAutoDrawer">
+    {% include nav-drawer.html %}
+    <div class="content">
+        {% if site.alert.active == true %}
+            {% include alert-box.html %}
+        {% endif %}
+        
+        {% include loading-message.html %}
+
+        <div id="app-container">
+
+            <div class="row">
+                <div class="col-sm-9">
+                    <h1 class="lead">Quality Control for a Calendar Year</h1>
+                    <span id="station-name" class="station-info  slim-vertical"></span>
+                </div>
+                <div class="col-sm-3">
+                    <div class="pull-right text-right">
+                    <a href="//mesowest.utah.edu">
+                    <p><button class="btn btn-default img__mw20-logo">
+                    <img src="{{"/assets/img/mw-20th-trans.png" | prepend: site.baseurl }}" class="img__mw20-logo" />
+                    </button>
+                    </p>
+                    <p>Return to MesoWest</p>
+                    </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-12"><hr/></div>
+                
+                <div class="col-sm-12 col-md-4">
+                    <p>QA/QC Flags</p>
+                    <div id="filter-container-selector-flag" class="checkbox-inline"></div>
+                </div>
+                
+                <div class="col-sm-12 col-md-4">
+                    <p>Sensors/Variables</p>
+                    <div id="filter-container-selector-sensor" class="checkbox-inline"></div>
+                </div>
+
+            </div>
+            
+            <!--<div>-->
+            <div class="row">
+                <hr/>
+                <div class="col-xs-12">
+                    <button class="btn btn-default" data-toggle="collapse" aria-expanded="false" aria-controls="filter-container" id="show-doy-toggle-btn">
+                        <i class="fa" aria-hidden="true" id="show-doy-toggle-icon"></i>&nbsp;Show Day of Year
+                    </button>
+                </div>
+                <div class="vspace-2"></div>
+                <div class="col-xs-12">
+                    <div class="panel panel-default table-responsive" id="day-of-year-calendar-container"></div>
+                </div>
+
+            </div>
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                    <div class="well">
+                        <ul>
+                            <li>If an item is highlighted <span style="color:red">red</span> or has a grey hash, then there is a quality control flag associated with the observation.</li>
+                            <li>The red color indicates a SynopticLabs QC flag, whereas the grey hash is a MADIS flag.</li>
+                            <li>You can investigate the QC flag by mousing over the observation.</li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    {% include filter_modal.html %}
+    {% include qc_director.html %}
+    {% include footer.html %}
+
+</body>
+
+    {% minibundle js %}
+    source_dir: _src
+    destination_path: /assets/js/qc.single
+    baseurl: {{ site.baseurl }}
+    assets:
+      - /core/mesonet-0.7.3
+      - /core/core.user
+      - /core/qc.mesonet-current
+      - /core/d3.v4
+      - /apps/qc.single
+    attributes:
+      id: __js-qc-single
+    {% endminibundle %}
+
+</html>

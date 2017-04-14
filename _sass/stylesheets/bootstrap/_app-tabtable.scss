@@ -1,0 +1,269 @@
+.bang {
+    // background: rgba(189, 33, 33, 0.3) !important;
+    background: #BDBDBD;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    z-index: 99999;
+}
+
+.bang-sl-qc {
+    background: rgba(189, 33, 33, 0.3) !important;
+    color: black;
+    font-weight: bold;
+    font-size: 1.1em !important;
+    text-align: center;
+    z-index: 99999;
+    border: 1px solid black 1px !important;
+}
+
+.bang-sl-data-check {
+    background: rgba(255, 217, 102, 0.3) !important;
+    color: black;
+    font-size: 1.1em !important;
+    font-weight: 900;
+    text-align: center;
+    z-index: 99999;
+}
+
+.bang-madis {
+    background: rgba(102, 204, 255, 0.3) !important;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    z-index: 99999;
+}
+
+.hide {
+    display: none;
+}
+
+.tooltip {
+    white-space: nowrap;
+}
+
+.navbar-li-btn {
+    margin: 10px 5px;
+}
+
+.highlight {
+    // background: rgba(173, 255, 47, 0.20) !important;
+    background: rgba(1, 223, 165, 0.20) !important;
+}
+
+.page-header .lead {
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.page-header p {
+    margin: 0;
+}
+
+/*! Used for debugging */
+/*table td, table th {
+    border: 1px solid cyan !important;
+}*/
+
+table.tabtable {
+    width: auto !important;
+}
+
+.tabtable th,
+.tabtable td {
+    vertical-align: middle !important;
+    white-space: nowrap;
+}
+
+.tabtable td {
+    white-space: nowrap;
+    /*padding-right: 1.25em !important;*/
+}
+
+.tabtable-header {
+    white-space: nowrap;
+}
+
+.tabtable-units {
+    /*padding: 0;*/
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.tabtable .first-column {
+    padding-left: 1em;
+    padding-right: 2.1em;
+}
+
+#metar .tabtable {
+    text-align: right;
+}
+
+.vspace-0 {
+    margin-bottom: 13.5px;
+}
+
+#fixed-top {
+    position: fixed;
+    top: 0px;
+    display: none;
+    background: white;
+    z-index: 9999;
+}
+
+.fixed-top-container {
+    top:0;
+}
+
+.sort-icon {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#toggle-timezone {
+    white-space: nowrap;
+}
+
+.station-info {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+div.station-products-btn {
+    display: inline-block;
+    vertical-align: top !important;
+}
+
+.tabtable i {
+    margin-left: 0.25em !important;
+    padding-right: 10px !important;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+    zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
+}
+
+.event-tip {
+    font-size: 0.75em;
+    display: block;
+    text-align: center;
+    color: red;
+}
+
+.metar-message {
+    font-size: 0.85em;
+    text-align: left !important;
+    white-space: nowrap;
+}
+
+.metar {
+    text-align: left !important;
+}
+
+/*
+    * 24 Hour Summary
+    */
+.weather-summary-table, .weather-summary-panel {
+    width: auto !important;
+    text-align: right;
+}
+.weather-summary-table td {
+    padding-left: 2em !important;
+    padding-right: 1em !important;
+}
+.weather-summary-table th:first-child,
+.weather-summary-table td:first-child {
+    text-align: left;
+    padding-left: 1em !important;
+    padding-right: 2em !important;
+}
+.weather-summary-table tr.alt {
+    background: #f9f9f9;
+}
+.empty-row {
+    display: none;
+}
+
+/*
+    * QC Inspector dialog
+    */
+.qc-inspector-table th,
+.qc-inspector-table th:first-child,
+.qc-inspector-table td,
+.qc-inspector-table td:first-child {
+    white-space: nowrap;
+    text-align: left;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+/*
+    * SVG plot/figures
+    */
+.axis text {
+    font-family: Arial;
+    font-size: 13px;
+    color: #333333;
+    text-anchor: end;
+}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.data-line {
+    stroke: red;
+}
+
+.center-line {
+    stroke: #e5e5e5;
+    stroke-width: 1;
+    stroke-dasharray: 5, 5;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.textlabel {
+    font-family: Arial;
+    font-size: 13px;
+    color: #333333;
+    text-anchor: middle;
+}
+
+strike {
+    color: red;
+    font-weight: bold;
+}
+
+
+.qc-tooltip {
+    padding:0;
+    margin: 0;
+}
+
+.qc-tooltip table > tbody > td {
+    text-align: left !important;
+}
+
+.qc-tooltip li {
+    list-style-type: none;
+    text-align: left;
+}
+
+.unit-table td,
+.unit-table th {
+    text-align: left !important;
+}

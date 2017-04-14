@@ -1,0 +1,52 @@
+#
+# Welcome to Jekyll!
+#
+
+# Site settings
+title: SynopticLabs
+email: info@synopticlabs.org
+description: SynopticLabs Data Meterological Data
+
+baseurl: "//dev2.mesowest.net/tomato/"
+# baseurl: "//synopticlabs.org/demos/qc/"
+
+
+exclude: [node_modules, readme.md, tests, package.json, clog]
+
+twitter_username: SynopticLabs
+github_username:  mesowx
+
+# Build settings
+permalink: /blog/:year/:month/:day/:title.html
+markdown: kramdown
+
+kramdown:
+  auto_ids: true
+  input: GFM
+  syntax_highlighter: none
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+
+gems:
+  - 'jekyll-press'
+  - 'jekyll/minibundle'
+
+minibundle:
+ minifier_commands:
+   css: _bin/remove_whitespace
+  #  js: node_modules/.bin/uglifyjs --mangle --compress --
+   js: node_modules/.bin/uglifyjs -b
+
+jekyll-press:
+  exclude: 'atom.xml'
+  js_options: {}      # js minifier options
+  css_options: {}     # css minifier options
+  html_options: {
+    # collapseWhitespace: true,
+    # removeComments: true
+  }
+
+# Alert messages to the user
+alert:
+  active: false
+  type: warning # success, info, warning, danger
+  message: <p><b>This product is still in Beta!</b> Please email <a href="mailto:help@synopticlabs.org?subject=QC Beta Products">help@synopticlabs.org</a> with any bugs or <a href="https://github.com/mesowx/issues" target="_new">chat with us</a>.</p>

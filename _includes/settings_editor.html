@@ -1,0 +1,130 @@
+<!-- Preferences modal -->
+<div class="modal fade" id="settings-editor" tabindex="-1" role="dialog" aria-labelledby="settings-editor">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>Preferences </p>
+            </div>
+
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#prefs-general" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;General Settings</a></li>
+                    <li role="presentation"><a href="#prefs-units" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-balance-scale" aria-hidden="true"></i>&nbsp;Units</a></li>
+                    <li role="presentation"><a href="#prefs-sensors" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-thermometer-three-quarters" aria-hidden="true"></i>&nbsp;Variables</a></li>
+                </ul>
+
+                <div class="vspace-0"></div>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <!-- General settings -->
+                    <div role="tabpanel" class="tab-pane active" id="prefs-general">
+                        <div class="vspace-1"></div>
+                    </div>
+
+                    <!-- Unit settings -->
+                    <div role="tabpanel" class="tab-pane" id="prefs-units">
+                        <div class="vspace-1"></div>
+                        <div class="container">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Default Unit convention</label>
+                                <div class="col-sm-9">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button id="toggle-units-metric" class="btn btn-default units-conv" value="0">Metric</button>
+                                        <button id="toggle-units-english" class="btn btn-default units-conv" value="1">English</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="table-responsive">
+                            <!-- Table version -->
+                            <table class="table table-condensed unit-table">
+                                <thead>
+                                    <tr>
+                                        <th>Variable Type</th>
+                                        <th colspan="4"><span class="center">Units</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Altimeter</td>
+                                        <td><input class="units-selector" type="radio" name="units-alti" id="units-alti-pa" value="pa">&nbsp;Pa</td>
+                                        <td><input class="units-selector" type="radio" name="units-alti" id="units-alti-hpa" value="hpa">&nbsp;hpa</td>
+                                        <td><input class="units-selector" type="radio" name="units-alti" id="units-alti-inhg" value="inhg">&nbsp;inHg</td>
+                                        <td><input class="units-selector" type="radio" name="units-alti" id="units-alti-mb" value="mb">&nbsp;mb</td>
+                                    </tr><tr>
+                                        <td>Height</td>
+                                        <td><input class="units-selector" type="radio" name="units-height" id="units-height-m" value="m">&nbsp;m</td>
+                                        <td><input class="units-selector" type="radio" name="units-height" id="units-height-ft" value="ft">&nbsp;ft</td>
+                                        <td colspan="2"></td>
+                                    </tr><tr>
+                                        <td>Precipitation</td>
+                                        <td><input class="units-selector" type="radio" name="units-precip" id="units-precip-mm" value="mm">&nbsp;mm</td>
+                                        <td><input class="units-selector" type="radio" name="units-precip" id="units-precip-cm" value="cm">&nbsp;cm</td>
+                                        <td><input class="units-selector" type="radio" name="units-precip" id="units-precip-in" value="in">&nbsp;in</td>
+                                        <td></td>
+                                    </tr><tr>
+                                        <td>Pressure</td>
+                                        <td><input class="units-selector" type="radio" name="units-pres" id="units-pres-pa" value="pa">&nbsp;Pa</td>
+                                        <td><input class="units-selector" type="radio" name="units-pres" id="units-pres-hpa" value="hpa">&nbsp;hpa</td>
+                                        <td><input class="units-selector" type="radio" name="units-pres" id="units-pres-inhg" value="inhg">&nbsp;inHg</td>
+                                        <td><input class="units-selector" type="radio" name="units-pres" id="units-pres-mb" value="inhg">&nbsp;mb</td>
+                                    </tr><tr>
+                                        <td>Speed</td>
+                                        <td><input class="units-selector" type="radio" name="units-speed" id="units-speed-mps" value="mps">&nbsp;m&#8226;s<sup>-1</sup></td>
+                                        <td><input class="units-selector" type="radio" name="units-speed" id="units-speed-mph" value="mph">&nbsp;mph</td>
+                                        <td><input class="units-selector" type="radio" name="units-speed" id="units-speed-kph" value="kph">&nbsp;kph</td>
+                                        <td><input class="units-selector" type="radio" name="units-speed" id="units-speed-kts" value="kts">&nbsp;kts</td>
+                                    </tr> <tr>
+                                        <td>Temperature</td>
+                                        <td><input class="units-selector" type="radio" name="units-temp" id="units-temp-c" value="C">&nbsp;&deg;C</td>
+                                        <td><input class="units-selector" type="radio" name="units-temp" id="units-temp-f" value="F">&nbsp;&deg;F</td>
+                                        <td><input class="units-selector" type="radio" name="units-temp" id="units-temp-k" value="K">&nbsp;K</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- Available Sensors -->
+                    <div role="tabpanel" class="tab-pane" id="prefs-sensors">
+                        <div class="vspace-1"></div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Selection Options</div>
+                            <div class="panel-body">
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="sensors-best-choice" type="checkbox"> Best sensor choice (selects displays only one of each sensor)
+                                    </label>
+                                </div>
+
+                                <div class="btn-group" role="group">
+                                    <button id="sensors-default-set" type="button" class="btn btn-default">Default Variables</button>
+                                    <button id="sensors-select-all" type="button" class="btn btn-default">Select All</button>
+                                    <button id="sensors-unselect-all" type="button" class="btn btn-default">De-select All</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Variable Inventory</div>
+                            <div class="panel-body">
+                                <div class="settings-sensor-list" id="settings-sensor-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

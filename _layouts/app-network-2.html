@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include head.html %}
+    <style>
+        /*#the-red-logo-bar {
+            display: none;
+        }*/
+        body {
+            padding-top: 0;
+        }
+        .alert-top-of-page {
+            margin: 0 !important;
+        }
+        header {
+            position: relative;
+        }
+        #app-container {
+            height: 700px;
+        }
+        .table-no-pad td, tr{
+            padding: 0px !important;
+        }
+        .table-no-pad td:first-child, tr{
+            padding-left: 5px !important;
+            max-width: 7em;
+            width: 6em;
+        }
+        .green {
+            background: greenyellow !important;
+            z-index: 999;
+        }
+
+        /* Tooltip container */
+        .native-tooltip {
+            position: relative;
+                opacity: 1;
+            /*border-bottom: 1px dotted black;  If you want dots under the hoverable text */
+        }
+
+        /* Tooltip text */
+        .native-tooltip .native-tooltiptext {
+            visibility: hidden;
+            width: 240px;
+            /*width: auto;*/
+            background-color: #000;
+            color: white;   
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 2px;
+
+            /* Position the tooltip text */
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -120px;
+
+            /* Fade in tooltip */
+            opacity: 1;
+            transition: opacity 1s;
+        }
+
+        /* Tooltip arrow */
+        .native-tooltip .native-tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .native-tooltip:hover .native-tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .native-tooltip .native-tooltip-table {
+            border: 1px solid green;
+            padding:5px;
+        }
+
+        .native-tooltip .native-tooltip-table td{
+            border: 1px solid yellow;
+            padding:5px;
+        }
+    </style>
+</head>
+
+<body class="noAutoDrawer">
+    {% if site.alert.active == true %}
+        {% include alert-box.html %}
+    {% endif %}
+    {% include nav-drawer.html %}
+    {% include app-toolbar.html %}
+
+    <div class="content">
+        {% include loading-message.html %}
+        <div id="app-container"></div>
+        <hr>
+        <p class="text-center">A tip can go here, because this app might need it</p>
+    </div>
+
+
+</body>
+
+    {% minibundle js %}
+    source_dir: _src
+    destination_path: /assets/js/network2
+    baseurl: {{ site.baseurl }}
+    assets:
+      - /core/domket
+      - /core/mesonet-2.2.0
+      - /core/core.user
+      - /core/d3.v4
+      - /apps/qc.network2
+    attributes:
+      id: __js-network2
+    {% endminibundle %}
+
+</html>

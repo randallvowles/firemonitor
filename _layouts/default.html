@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include head.html %}
+    <style>
+        .article__img,
+        .article__short-img{
+            text-align: center;
+        }
+        .article__short-img > img{
+            width: 300px !important;
+            display: inline;
+            min-width: 33%;
+        }
+        .article__img > img{
+            width: 750px !important;
+            display: inline;
+            max-width: 100%;
+        }
+        .content {
+            padding-left: 4em;
+            padding-right: 4em;
+            max-width: 1024px;
+        }
+    </style>
+</head>
+
+<body class="noAutoDrawer">
+    {% include nav-drawer.html %}
+    <div class="content">
+        {% if page.ignore_alert == false and site.alert.active == true %}
+            {% include alert-box.html %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">{{ page.title }}</h1>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="col-md-12">
+                {{ content }}
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    {% include footer.html %}
+
+</body>
+
+</html>

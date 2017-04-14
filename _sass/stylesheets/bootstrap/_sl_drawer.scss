@@ -1,0 +1,240 @@
+/*
+*	The Style Sheet for the left side drawer.
+*
+*	December 2015
+*	Author: Joe Young;
+*	Email: joe.young@utah.edu;
+*
+*
+*	this is a special edition of mesowest.css for use on external sites to give them access to the side nav without messing up too much else
+*/
+
+html.noscroll
+{
+    position: fixed; 
+    width: 100%;
+}
+html.noscroll.withscrollbar {
+    overflow-y:scroll;
+}
+body.noscroll {
+    position:fixed;
+}
+
+.transitional {
+    /*
+    *	All the possible styles to make an element have nice, gpu-enhanced css animations
+    */
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition-delay: 0.1s;
+    -moz-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    
+    -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    -moz-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.show-drawer {
+    visibility: visible;
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    transform: translateX(0px);
+}
+.show-drawer .wrapper {
+    display:block;
+}
+.hide-drawer { 
+    visibility: hidden;
+    -webkit-transform: translateX(-241px);
+    -moz-transform: translateX(-241px);
+    -ms-transform: translateX(-241px);
+    -o-transform: translateX(-241px);
+    transform: translateX(-241px);
+}
+.hide-drawer .wrapper {
+    display:none;
+    /*The downside of this is that their scroll position gets reset.*/
+}
+#drawer div, #drawer a {
+    box-sizing:border-box;
+}
+#drawer {
+    font-size:13px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:240px;
+    background-color:#FFF;
+    z-index: 100024;
+    overflow-y:auto;
+    -webkit-overflow-y-scrolling: touch;
+    color: #000;
+    height:100%;
+    padding:0;
+    box-shadow: 5px 0px 6px rgba(0,0,0,.2);
+
+    /* Motion CSS -  in additino to .transitional*/
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    /*
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);*/
+
+    
+    /*And the styles to disengage*/
+    
+}
+#drawer a{
+    text-decoration:none;
+}
+#drawer a.hover {
+    text-decoration: none;
+}
+#drawer .wrapper {
+    position:relative;
+    min-height:100%;
+    padding-bottom:130px;
+}
+#drawer a, #drawer a.hasmore .hmddL {
+    display:block;
+    position:relative;
+    padding:10px 0 10px 20px;
+    color:#333;
+    font-weight:600;
+    -webkit-transition-property: color background-color;
+    -moz-transition-property: color background-color;
+    transition-proprty: color, background-color;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: .2s;
+}
+#drawer a.hasmore .hmddL {
+    position:absolute;
+    right:0;
+    top:0;
+    font-size: 1em;
+    width:60px;
+    padding:10px;
+    background-color:#FFF;
+    text-align:center;
+}
+#drawer a.hasmore a.hmddL:hover {
+    background-color: #999;
+    color:#FFF;
+}
+/*#drawer a.hasmore:hover .hmddL {
+    background-color: inherit;
+}*/
+#drawer .menu-level-1 a {
+    padding-left:40px;
+    color:#777;
+}
+#drawer .menu-level-2 a {
+    padding-left:60px;
+    color:#777;
+}
+#drawer a:hover, #drawer a:hover .hmddL {
+    color: #000;
+    background-color: #ccc;
+}
+#drawer a .icon-up-open {
+    color:#bbb;
+}
+#drawer a:hover .icon-up-open {
+    color: #eee;
+}
+@media screen and (min-width:700px){
+    /* this is for the special circumstance where the drawer is to be kept visible in all but the most extreme situations */
+    body.smallAutoDrawer #drawer.hide-drawer {
+        visibility:visible;
+        -webkit-transform: translateX(0px);
+        -moz-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        -o-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+    body.smallAutoDrawer .hide-drawer .wrapper {
+        display:block;
+    }
+    
+    body.smallAutoDrawer {
+        padding-left:240px;
+    }
+    
+    body.smallAutoDrawer .icon-menu {
+        /* no need to see the menu dropdown icon */
+        display:none;
+    }
+}
+
+@media screen and (min-width: 950px) {
+    /*	
+        Drawer and title modifications for larger screens!
+    */
+    #drawer.hide-drawer {
+        visibility:visible;
+        -webkit-transform: translateX(0px);
+        -moz-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        -o-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+    .hide-drawer .wrapper {
+        display:block;
+    }
+    
+    body {
+        padding-left:240px;
+    }
+    
+    .icon-menu {
+        /* no need to see the menu dropdown icon */
+        display:none;
+    }
+
+    body.noAutoDrawer {
+        padding-left:0;
+    }
+    body.noAutoDrawer .icon-menu {
+        display:inline-block;
+    }
+    body.noAutoDrawer #drawer.hide-drawer {
+        visibility:hidden;
+        -webkit-transform: translateX(-241px);
+        -moz-transform: translateX(-241px);
+        -ms-transform: translateX(-241px);
+        -o-transform: translateX(-241px);
+        transform: translateX(-241px);
+
+    }
+    body.noAutoDrawer .hide-drawer .wrapper {
+        display:none;
+    }
+} /*end of larger screens*/
+
+#drawer .wrapper .foot {
+    font-size:13px;
+    padding:30px;
+    border-top:1px solid #ddd;
+    position:absolute;
+    bottom:0;
+    height:100px;
+    margin:0 30px;
+    width:180px;
+    text-align:center;
+
+}

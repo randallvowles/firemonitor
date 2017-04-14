@@ -1,0 +1,25 @@
+{
+  "name": "tomato",
+  "version": "1.0.0",
+  "description": "SynopticLabs QC exploring web app",
+  "main": "index.js",
+  "scripts": {
+    "start": "jekyll serve --baseurl \"\" --host 0.0.0.0",
+    "build": "jekyll build --config _config-dev.yml",
+    "build-prod": "jekyll build --config _config-prod.yml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamabernathy/tomato.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamabernathy/tomato/issues"
+  },
+  "homepage": "https://github.com/adamabernathy/tomato#readme",
+  "dependencies": {
+    "uglify-js": "^2.7.5"
+  }
+}

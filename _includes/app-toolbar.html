@@ -1,0 +1,51 @@
+<nav id="app-toolbar" class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+        <span class="sr-only">Toggle Tools</span>
+        <span class="fa fa-wrench"></span>
+      </button>
+            <a class="navbar-brand" alt="Application toolbar" onClick="window.location.reload()">
+                <i class="fa fa-circle hidden" id="notify-telemetry-icon"></i>
+                <i class="fa fa-refresh" id="notify-dev-server"></i>
+            </a>
+            <span class="navbar-brand" id="touch-toggle-controller"></span>
+        </div>
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!-- Any app can append to this element -->
+            <span id="toolbar-local-tools-container"></span>
+                <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#about-this-app-modal">About this application</a></li>
+                        <li class="disabled"><a href="#">Welcome / Documentation</a></li>
+                        <li class="disabled"><a href="#">Keyboard Reference</a></li>
+  
+                        <li><a href="{{"docs/general-qc-information.html" | prepend: site.baseurl }}">Quality control (QC) information</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="//github.com/mesowx/issues/">Report an issue or talk with us</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-right">
+                <a href="//mesowest.utah.edu">
+                    <button class="btn btn-default img__mw20-logo">
+                    <img src="{{"assets/img/mw-20th-trans.png" | prepend: site.baseurl }}" class="img__mw20-logo" />
+                    </button>
+                </a>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="//http:mesowest.utah.edu">Return to MesoWest</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+{% include about-this-app-modal.html %}

@@ -1,0 +1,27 @@
+.mw-bang {
+    color: white;
+    background-color: #DF0101 !important;
+}
+
+.madis-bang-large {
+    color: #fff;
+      background: 
+        linear-gradient(
+          -45deg,
+            transparent 29px, /* Background */
+            transparent 9px, /* initial stripe */
+            $gray-light 0px,
+            $gray-light 5px
+        );
+}
+
+.madis-bang {
+    color: #000;
+        background: repeating-linear-gradient(
+        -45deg,
+        transparent, /* Background */
+        transparent 0.14vw, /* initial stripe */
+        $gray-light 0px,
+        $gray-light 0.28vw
+    );
+}

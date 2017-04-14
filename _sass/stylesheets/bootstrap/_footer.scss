@@ -1,0 +1,45 @@
+.footer {
+    font-size: 0.85em;
+    position: relative;
+    bottom: 0;
+    //width: 100%;
+    /* Set the fixed height of the footer here */
+    // height: $footer-height;
+    // background-color: $footer-bg;
+    border-top: 1px solid $panel-default-border;
+    background-color: $body-bg;
+    //margin-top: 65%;
+    margin-top: 100px;
+    // border-top: 5px solid $gray-lighter;
+    // padding-top: 25px;
+    // margin-right: auto;
+    // margin-left: auto;
+    width: 100%;
+    color: $panel-default-text;
+    a {
+        color: $panel-default-text;
+    }
+    &:active,
+    &:hover {
+        color: $brand-primary;
+    }
+
+    dl, dt, dd {
+        line-height: 2.0em !important;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      //width: $container-sm;
+      width: 100%;
+    }
+    @media (min-width: $screen-md-min) {
+      //width: $container-md;
+      width: 100%;
+    }
+    @media (min-width: $screen-lg-min) {
+    //   //width: $container-lg;
+    //   padding-right: 15%;
+    //   padding-left: 15%;
+      width: 100%;
+    }
+}

@@ -1,0 +1,78 @@
+.qc-table {
+    width: auto;
+}
+.qc-table td, .qc-table th {
+    max-width: 6em !important;
+    width: auto;
+    border: 1px solid lightgrey;
+    text-align: center;
+}
+
+.qc-table th {
+    padding: 0.15em
+}
+
+.qc-table td:first-child, .qc-table th:first-child {
+    padding-right: 5em;
+    border-left: none;
+}
+
+.qc-table th:first-child {
+    border-top: none;
+}
+
+.qc-active {
+    background: rgba(178, 178, 178, 0.35) !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+.highlight-border {
+    border: 3px solid rgba(1, 223, 165, 1) !important;
+    z-index: 1000000;
+    border-radius: 4px;
+}
+
+// .filter-selector-container {
+//     position: absolute;
+//     display: block;
+// }
+
+.fixed-top-container {
+    top:0;
+}
+
+.filter-selectors li {
+    list-style-type: none;
+}
+
+.filter-selectors label {
+    padding-left: 0.5em;
+    font-size: 0.9em;
+}
+
+.table-container {
+    // position: relative;
+    // margin: 0 auto;
+    // margin-left: 250px;
+    // display: block;
+    overflow-x: scroll;
+}
+
+/* Hack */
+table > tbody > tr > td.active {
+    background: inherit;
+    transition-duration: 0.20s;
+    -webkit-transition: background-color 500ms ease-out 0.20s;
+    -moz-transition: background-color 500ms ease-out 0.20s;
+    -o-transition: background-color 500ms ease-out 0.20s;
+    transition: background-color 500ms ease-out 0.20s;
+}
+
+.checkbox-inline li {
+  list-style-type: none;
+}
+
+.checkbox-inline label {
+    padding-left: 0.5em;
+}

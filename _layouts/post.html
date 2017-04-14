@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<article>
+<div class="blog-post" itemscope itemtype="http://schema.org/BlogPosting">
+
+        <h1 itemprop="name headline">{{ page.title }}</h1>
+        <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"></span>{% endif %}</p>
+
+        <div class="post-content" itemprop="articleBody">
+          {{ content }}
+        </div>
+
+        <div class="blog-footer">
+            <p>Have feedback on this post? Let <a href="https://twitter.com/synopticLabs">@SynopticLabs</a> know on Twitter.</p>
+            <p>Need help or found a bug? <a href="mailto:atmos-mesowest@lists.utah.edu" target="_top">Contact us</a>.</p>
+        </div>
+    </div>
+</article>
+
+<div class="row vspace-1">
+    <div class="col-sm-12 text-center">
+        <hr/>
+        <div class="vspace-1"></div>
+        <form action="/search.html" method="get" class="form-inline">
+            <div class="form-group">
+                <!-- <label for="search-box">Search</label> -->
+                <input type="text" id="search-box" class="form-control" name="query" placeholder="What are you looking for?">
+                <button type="submit" id="search-submit" class="form-control btn btn-default" value="search">Search</button>
+            </div>
+        </form>
+    </div>
+</div>

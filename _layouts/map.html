@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include head.html %}
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+            html, body, #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    {% include navbar.html %}
+    <div id="map"></div>
+</body>
+
+<script src="{{ "/assets/js/core/baseplate.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/assets/js/core/mesonet-current.min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/assets/js/core/leaflet.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/assets/js/metamap.js" | prepend: site.baseurl }}"></script>
+<!-- <script src="http://scs.synopticlabs.net/js/glytics_slabs.js"></script> -->
+<script>
+    (function() {
+        initMap();
+    })();
+</script>
+
+</html>
