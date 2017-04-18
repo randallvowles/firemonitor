@@ -48,7 +48,7 @@
             // json_url: 'http://home.chpc.utah.edu/~u0540701/storage/fire_data/',
             // json_metadatastash: "current_metadatastash.json",
             // json_full: "current_fire_data.json",
-            json_cache: "http://home.chpc.utah.edu/~u0751826/fireapi/listing.py",
+            json_cache: "//home.chpc.utah.edu/~u0751826/fireapi/listing.py?callback=?",
             json_baseURL: "http://home.chpc.utah.edu/~u0751826/fireapi/fires.py?id=",
             self: "firemonitor.html",
             // qcNetworkURL: "./network.html",
@@ -101,7 +101,7 @@
     var _CLASS_ = ".";
 
     // Start off by hiding app while we load the canons
-    d3.selectAll(_ID_ + state.ui.appContainer.id).classed(state.ui.css.hide, false);
+    d3.selectAll(_ID_ + state.ui.appContainer.id).classed(state.ui.css.hide, true);
 
     // Get the user's cookie, determine if the cookie needs to be replaced or not
     state.P = new User({
@@ -157,7 +157,7 @@
         state.store.fireCache = d;
         state.store.defaultFireId = d["CURRENT_FIRES"][0];
         //maybe send the keys to the dropdown menu at this point
-        console.log(d)
+        console.log(d);
         _buildDropdownFireSelect();
         jsonFetch(state.http.json_baseURL + state.http.json_full + state.store.current_fireId, function (j) {
             state.store.fullFireData = j;
@@ -241,4 +241,4 @@
     }
 
 
-})
+})();
