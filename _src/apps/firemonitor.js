@@ -45,13 +45,9 @@
             }
         },
         http: {
-            // json_url: 'http://home.chpc.utah.edu/~u0540701/storage/fire_data/',
-            // json_metadatastash: "current_metadatastash.json",
-            // json_full: "current_fire_data.json",
-            fireListingService: "//home.chpc.utah.edu/~u0751826/fireapi/listing.py?callback=?",
-            fireDataService: "//home.chpc.utah.edu/~u0751826/fireapi/fires.py?id=",
-            // json_cache: "//home.chpc.utah.edu/~u0751826/fireapi/listing.py?callback=?",
-            // json_baseURL: "//home.chpc.utah.edu/~u0751826/fireapi/fires.py?id=",
+
+            fireListingService: "//home.chpc.utah.edu/~u0751826/fireapi/listing",
+            fireDataService: "//home.chpc.utah.edu/~u0751826/fireapi/fires",
             self: "firemonitor.html",
             // qcNetworkURL: "./network.html",
             mwHome: "//mesowest.utah.edu",
@@ -65,7 +61,7 @@
                 id: "station-info"
             }
         },
-        tabTableEmitter: {
+        fireMonitorEmitter: {
             props: {
                 containerId: "firemonitor-container",
                 tableId: "firemonitor",
@@ -155,21 +151,21 @@
     jsonFetch(state.http.fireListingService, {}, function (data) {
         state.store.fireCache = data;
         state.store.defaultFireId = Object.keys(data.CURRENT_FIRES)[0];
-        var windowUrl = getWindowArgs();
-        var fireId = windowUrl.fire !== null ? windowUrl.fire : state.store.defaultFireId;
-        state.store.current_fireId = fireId
-        console.log(fireId);
+        // var windowUrl = getWindowArgs();
+        // var fireId = windowUrl.fire !== null ? windowUrl.fire : state.store.defaultFireId;
+        // state.store.current_fireId = fireId
+        // console.log(fireId);
+        console.log('Fire Metadata Cache', data);
         //maybe send the keys to the dropdown menu at this point
-        console.log('data returned', data);
         // _buildDropdownFireSelect();
-        jsonFetch(state.http.fireDataService, { id: state.store.current_fireId }, function (d) {
+        jsonFetch(state.http.fireDataService, { id: state.store.defaultfireId }, function (d) {
             state.store.fullFireData = d;
-            console.log('data returned', d);
-            var _f = state.store.current_fireId;
+            console.log('Specific Fire Data', d);
+            console.log(state.store)
             var key;
-            for (key in d[_f].nearest_stations) {
-                stidStack.push(d[_f].nearest_stations[key]["STID"]);
-                stidAndDist.push(d[_f].nearest_stations[key]["DFP"]);
+            for (key in d.nearest_stations) {
+                stidStack.push(d.nearest_stations[key]["STID"]);
+                stidAndDist.push(d.nearest_stations[key]["DFP"]);
             };
             state.store.stidList = stidStack.join(",");
             state.api.stid = state.store.stidList
@@ -178,6 +174,50 @@
             })
         })
     })
+
+    // Show response in console?
+    parseRunFlags('showResponse', '1', null, true, function () { console.log(Mesonet); });
+    // Disable precision in table
+    parseRunFlags('disablePrec', '1', 'disablePrecision', true);
+    // Ascend Table?
+    parseRunFlags(
+        'tableAscend', '1',
+        'ascendTable', true,
+        function () {
+            if (state.runFlags.ascendTable) { state.fireMonitorEmitter.props.descend = false; }
+        }
+    );
+    // Show time format as UNIX time
+    parseRunFlags('timeFormatUnix', '1', 'showUnixTime', true);
+    parseRunFlags('timeFormatDATTIM', '1', 'showDATTIMtime', true);
+    // Highlight rows
+    if (typeof state.http.thisURL.highlight !== "undefined") {
+        parseHighlightRowOptions();
+    }
+    // Update the user's time format setting
+    state.tabTableEmitter.props.timeUTC = state.P._isUTC();
+
+    // While we are waiting, let's generate the toolbar links.
+    populateToolbar();
+
+    $.when(Mesonet.ready()).done(function () {
+        // Check the API response to make sure we have data and not just an error message.
+        if (Mesonet.store.status !== 1) {
+            d3.select(_HASH_ + state.ui.loading.progressBarId).classed(state.ui.css.hide, true);
+            d3.select(_HASH_ + state.ui.loading.errMessageId).text("Rhut Rho!");
+
+            createAlertBox({
+                alertType: "danger",
+                message: "Error code: <b>" + Mesonet.store.telemetry[0] + "<b/>",
+                closeMessage: false
+            }, "page-is-loading")
+
+            return;
+        }
+
+        
+    })
+
 
 
 
@@ -215,13 +255,14 @@
             }
         }
         request.send(null);
-        // http://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+
         function serialize(url, obj) {
-            var str = [];
-            for (var p in obj)
+            var str = ['?'];
+            for (var p in obj) {
                 if (obj.hasOwnProperty(p)) {
                     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                 }
+            }
             return url + str.join("&");
         }
     }
@@ -247,6 +288,54 @@
             }
             return a;
         }
+    }
+
+    /** Parses out runtime flags */
+    function parseRunFlags(flag, value, _flag, _bool, callback) {
+        if (
+            typeof state.http.thisURL[flag] !== "undefined" &&
+            (state.http.thisURL[flag] === value || value === null)
+        ) {
+            if (_flag !== null) { state.runFlags[_flag] = _bool; }
+            delete state.api[flag];
+            if (typeof callback === "function") { callback(); };
+        }
+    }
+
+    function parseHighlightRowOptions() {
+        var parts = state.http.thisURL.highlight.split(",");
+        state.runFlags.highlightRowItems[0] = parts[0].length === 12 ? Number(parts[0]) : false
+        if (parts.length > 1) {
+            state.runFlags.highlightRowItems[1] = Number(parts[1]) - 1;
+        }
+        state.runFlags.highlightRows = !state.runFlags.highlightRowItems[0] ? false : true;
+        delete state.api.highlight;
+    }
+
+    /**
+     * Appends a BS Alert box
+     * props.alertType, BS3 alert type
+     * props.message, string of text message
+     */
+    function createAlertBox(props, renderTo) {
+        // Gett'n ready for JSX yo!
+        var btnId = "alertBoxBtn" + Math.round(Math.random() * 10000000);
+
+        var html = "<div class=\"alert alert-" + props.alertType + " alert-dismissible\" role=\"alert\">" +
+            (
+                typeof props.closeMessage === "undefined" || props.closeMessage
+                    ? "<button id=\"" + btnId + "\" type=\"button\" " +
+                    "class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+                    "<span aria-hidden=\"true\">&times;</span></button>"
+                    : ""
+            ) +
+            props.message +
+            "</div>"
+
+        d3.select("#" + renderTo).append("div").classed("row", true)
+            .append("div").classed("col-sm-12", true).html(html);
+
+        return btnId;
     }
 
 
