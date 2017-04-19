@@ -48,8 +48,10 @@
             // json_url: 'http://home.chpc.utah.edu/~u0540701/storage/fire_data/',
             // json_metadatastash: "current_metadatastash.json",
             // json_full: "current_fire_data.json",
-            json_cache: "//home.chpc.utah.edu/~u0751826/fireapi/listing.py?callback=?",
-            json_baseURL: "http://home.chpc.utah.edu/~u0751826/fireapi/fires.py?id=",
+            fireListingService: "//home.chpc.utah.edu/~u0751826/fireapi/listing.py?callback=?",
+            fireDataService: "//home.chpc.utah.edu/~u0751826/fireapi/fires.py?id=",
+            // json_cache: "//home.chpc.utah.edu/~u0751826/fireapi/listing.py?callback=?",
+            // json_baseURL: "//home.chpc.utah.edu/~u0751826/fireapi/fires.py?id=",
             self: "firemonitor.html",
             // qcNetworkURL: "./network.html",
             mwHome: "//mesowest.utah.edu",
@@ -147,26 +149,27 @@
     var stidStack = [];
     var stidAndDist = [];
 
-    var windowUrl = getWindowArgs();
-    var fireId = windowUrl.fire !== null ? windowUrl.fire : state.store.defaultFireId;
-    state.store.current_fireId = fireId
-    console.log(fireId);
+
 
     // Time to fetch the json objects
-    jsonFetch(state.http.json_cache, function (d) {
-        state.store.fireCache = d;
-        state.store.defaultFireId = d["CURRENT_FIRES"][0];
+    jsonFetch(state.http.fireListingService, {}, function (data) {
+        state.store.fireCache = data;
+        state.store.defaultFireId = Object.keys(data.CURRENT_FIRES)[0];
+        var windowUrl = getWindowArgs();
+        var fireId = windowUrl.fire !== null ? windowUrl.fire : state.store.defaultFireId;
+        state.store.current_fireId = fireId
+        console.log(fireId);
         //maybe send the keys to the dropdown menu at this point
-        console.log(d);
-        _buildDropdownFireSelect();
-        jsonFetch(state.http.json_baseURL + state.http.json_full + state.store.current_fireId, function (j) {
-            state.store.fullFireData = j;
-            console.log(j);
+        console.log('data returned', data);
+        // _buildDropdownFireSelect();
+        jsonFetch(state.http.fireDataService, { id: state.store.current_fireId }, function (d) {
+            state.store.fullFireData = d;
+            console.log('data returned', d);
             var _f = state.store.current_fireId;
             var key;
-            for (key in j[_f]["nearest_stations"]) {
-                stidStack.push(j[_f]["nearest_stations"][key]["STID"]);
-                stidAndDist.push(j[_f]["nearest_stations"][key]["DFP"]);
+            for (key in d[_f].nearest_stations) {
+                stidStack.push(d[_f].nearest_stations[key]["STID"]);
+                stidAndDist.push(d[_f].nearest_stations[key]["DFP"]);
             };
             state.store.stidList = stidStack.join(",");
             state.api.stid = state.store.stidList
@@ -184,7 +187,7 @@
         var key;
         for (key in _m) {
             state.store.fireList.push(key);
-            d3.selectAll(_ID_ + state.toolbar.id)
+            d3.select(_ID_ + state.toolbar.id)
                 .append("ul").classed("nav navbar-nav", true)
                 .append("li").classsed("dropdown", true)
                 .append("a").classed("dropdown-toggle", true)
@@ -202,19 +205,25 @@
 
     }
 
-    function jsonFetch(url, callback) {
+
+    function jsonFetch(url, args, callback) {
         var request = new XMLHttpRequest();
-        request.open("GET", url)
+        request.open("GET", serialize(url, args))
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
-                json_total = JSON.parse(request.responseText)
                 callback(JSON.parse(request.responseText))
-            } else {
-                console.log(url)
-                console.log(request.responseText)
             }
         }
         request.send(null);
+        // http://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+        function serialize(url, obj) {
+            var str = [];
+            for (var p in obj)
+                if (obj.hasOwnProperty(p)) {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+            return url + str.join("&");
+        }
     }
 
     function getWindowArgs() {
