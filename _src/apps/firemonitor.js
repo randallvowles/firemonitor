@@ -56,11 +56,6 @@
         toolbar: {
             id: "toolbar-local-tools-container"
         },
-        stationDetailsEmitter: {
-            props: {
-                id: "station-info"
-            }
-        },
         fireMonitorEmitter: {
             props: {
                 containerId: "firemonitor-container",
@@ -91,7 +86,7 @@
             tableData: [],
             defaultFireId: "",
             fullFireData: [],
-            stidList: []
+            stidList: ""
         }
     };
 
@@ -151,21 +146,22 @@
     jsonFetch(state.http.fireListingService, {}, function (data) {
         state.store.fireCache = data;
         state.store.defaultFireId = Object.keys(data.CURRENT_FIRES)[0];
-        // var windowUrl = getWindowArgs();
-        // var fireId = windowUrl.fire !== null ? windowUrl.fire : state.store.defaultFireId;
-        // state.store.current_fireId = fireId
-        // console.log(fireId);
+        var windowUrl = getWindowArgs();
+        var fireId = windowUrl.fire !== "undefined" ? windowUrl.fire : state.store.defaultFireId;
+        state.store.current_fireId = fireId
+        console.log('fireId', fireId);
         console.log('Fire Metadata Cache', data);
         //maybe send the keys to the dropdown menu at this point
-        // _buildDropdownFireSelect();
-        jsonFetch(state.http.fireDataService, { id: state.store.defaultfireId }, function (d) {
+        _buildDropdownFireSelect();
+        jsonFetch(state.http.fireDataService, { id: state.store.defaultFireId }, function (d) {
             state.store.fullFireData = d;
             console.log('Specific Fire Data', d);
-            console.log(state.store)
+            // console.log(state.store)
             var key;
-            for (key in d.nearest_stations) {
-                stidStack.push(d.nearest_stations[key]["STID"]);
-                stidAndDist.push(d.nearest_stations[key]["DFP"]);
+            var _d = d.FIRES[state.store.defaultFireId].nearest_stations
+            for (key in _d) {
+                stidStack.push(_d[key].STID);
+                stidAndDist.push(_d[key].DFP);
             };
             state.store.stidList = stidStack.join(",");
             state.api.stid = state.store.stidList
@@ -195,27 +191,28 @@
         parseHighlightRowOptions();
     }
     // Update the user's time format setting
-    state.tabTableEmitter.props.timeUTC = state.P._isUTC();
+    state.fireMonitorEmitter.props.timeUTC = state.P._isUTC();
 
     // While we are waiting, let's generate the toolbar links.
     populateToolbar();
 
     $.when(Mesonet.ready()).done(function () {
         // Check the API response to make sure we have data and not just an error message.
+        console.log("API response", Mesonet.store)
         if (Mesonet.store.status !== 1) {
-            d3.select(_HASH_ + state.ui.loading.progressBarId).classed(state.ui.css.hide, true);
-            d3.select(_HASH_ + state.ui.loading.errMessageId).text("Rhut Rho!");
-
+            d3.select(_ID_ + state.ui.loading.progressBarId).classed(state.ui.css.hide, true);
+            d3.select(_ID_ + state.ui.loading.errMessageId).text("Rhut Rho!");
             createAlertBox({
                 alertType: "danger",
                 message: "Error code: <b>" + Mesonet.store.telemetry[0] + "<b/>",
                 closeMessage: false
             }, "page-is-loading")
-
             return;
         }
-
         
+        d3.selectAll(_ID_ + state.ui.appContainer.id).classed(state.ui.css.hide, false);
+        d3.select(_ID_ + state.ui.loading.id).classed(state.ui.css.hide, true);
+
     })
 
 
@@ -223,26 +220,18 @@
 
 
     function _buildDropdownFireSelect() {
-        var _m = state.store.fireCache;
+        var _m = state.store.fireCache.CURRENT_FIRES;
         var key;
         for (key in _m) {
             state.store.fireList.push(key);
-            d3.select(_ID_ + state.toolbar.id)
-                .append("ul").classed("nav navbar-nav", true)
-                .append("li").classsed("dropdown", true)
-                .append("a").classed("dropdown-toggle", true)
-                .attr("data-toggle", "dropdown").attr("role", "button")
-                .attr("aria-haspopup", "true").attr("aria-expanded", "false")
-                .append("span").classed("caret", true)
-                .each(function (d) {
-                    d3.select(this)
-                        .append("li")
-                        .append("a")
-                        .attr("href", "http://home.chpc.utah.edu/~u0540701/fireperimeter/table.html?fire=" + key)
-                        .text(key)
-                })
+            d3.select(_CLASS_ + "dropdown-menu").each(function(d){
+                d3.select(this)
+                    .append("li")
+                    .append("a")
+                    .attr("href", "//127.0.0.1:4000/firemonitor.html?fire=" + key)
+                    .text(key)
+            })
         }
-
     }
 
 
@@ -336,6 +325,21 @@
             .append("div").classed("col-sm-12", true).html(html);
 
         return btnId;
+    }
+
+    function populateToolbar() {
+        // This function will be completely rewritten using better DOM tactics.
+
+        var a = "<ul class=\"nav navbar-nav\">" +
+            "<li class=\"dropdown\">" +
+            "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" " +
+            "aria-haspopup=\"true\" aria-expanded=\"false\">Select Active Fire <span class=\"caret\"></span></a>" +
+            "<ul class=\"dropdown-menu\">" +
+            "</ul>" +
+            "</li>" +
+            "</ul>"
+
+        document.getElementById(state.toolbar.id).innerHTML = a;
     }
 
 
