@@ -61,19 +61,19 @@
         fireMonitorEmitter: {
             headers: [
                 {apiName: "stid", title: "Station ID", shortname: "STID"},
+                {apiName: "distance_from_perimeter", title: "Distance From Perimeter", shortname: "distance_from_perimeter"},
+                {apiName: "bearing_from_perimeter", title: "Bearing From Perimeter", shortname: "bearing_from_perimeter"},
+                {apiName: "time", title: "Time From Observation", shortname: "time"},
                 {apiName: "air_temp", title: "Air Temperature", shortname: "AT"},
                 {apiName: "relative_humidity", title: "Relative Humidity", shortname: "RH"},
                 {apiName: "wind_speed", title: "Wind Speed", shortname: "WS"},
                 {apiName: "wind_gust", title: "Wind Gust", shortname: "WG"},
                 {apiName: "wind_direction", title: "Wind Direction", shortname: "WD"},
-                {apiName: "weather_condition", title: "Weather Condition", shortname: "WC"},
-                {apiName: "bfp", title: "Bearing From Perimeter", shortname: "BFP"},
-                {apiName: "dfp", title: "Distance From Perimeter", shortname: "DFP"},
-                {apiName: "time", title: "Time From Observation", shortname: "time"}
+                {apiName: "weather_condition", title: "Weather Condition", shortname: "WC"}
             ],
             headerTOC: {
-                stid: 0, dfp: 8, bfp: 7, time: 9, air_temp: 1, relative_humidity: 2,
-                wind_speed: 3, wind_gust: 4, wind_direction: 5, weather_condition: 6
+                stid: 0, distance_from_perimeter: 1, bearing_from_perimeter: 2, time: 3, air_temp: 4, relative_humidity: 5,
+                wind_speed: 6, wind_gust: 7, wind_direction: 8, weather_condition: 9
             },
             props: {
                 containerId: "firemonitor-container",
@@ -179,7 +179,7 @@
             var _d = d.FIRES[fireId].nearest_stations
             for (key in _d) {
                 stidStack.push(_d[key].STID);
-                stidAndDist.push(_d[key].DFP);
+                stidAndDist.push(_d[key].distance_from_perimeter);
             };
             state.store.stidList = stidStack.join(",");
             state.api.stid = state.store.stidList
@@ -246,17 +246,32 @@
     function fireMonitorEmitter(){
         var rankedSensorStack = Object.keys(state.fireMonitorEmitter.headerTOC);
         state.store.rankedSensorStack = rankedSensorStack;
-        var _M = Mesonet.store;
+        var _M = Mesonet.store.tableOfContentsIndex;
         var _F = state.store.fullFireData;
         var props = state.fireMonitorEmitter.props;
         var DisplayUnits = new Units();
         var tableData = [];
-        _M.station.map(function (q){
-            var last = _M[q].OBSERVATIONS.date_time.length -1;
+        _M.map(function (stidIdx, stid){
+            var _S = Mesonet.store.station[stidIdx];
+            var last = _S.OBSERVATIONS.date_time.length -1;
             var temp = {};
-            rankedSensorStack.map(function (d) {
+            // var temp = {
+            //     stid: _S.STID,
+            //     distance_from_perimeter: _F.nearest_stations[stidIdx].distance_from_perimeter[0],
+            //     bearing_from_perimeter: _F.nearest_stations[stidIdx].distance_from_perimeter[1],
+            //     time: ":", //function to calculate time from observation
+            //     air_temp: _S.OBSERVATIONS.air_temp_set_1[last],
+            //     relative_humidity: _S.OBSERVATIONS.relative_humidity_set_1[last],
+            //     wind_speed: _S.OBSERVATIONS.wind_speed_set_1[last],
+            //     wind_gust: _S.OBSERVATIONS.wind_gust_set_1[last],
+            //     wind_direction: _S.OBSERVATIONS.wind_direction_set_1[last],
+            //     weather_condition: _S.OBSERVATIONS.weather_condition_set_1d[last]
+            // };
+            rankedSensorStack.map(function(d){
                 
             })
+
+
 
         })
     }
